@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -18,19 +19,27 @@ public class MovieService {
     @Autowired
     private  MovieRepository movieRepository;
 
+    @Transactional(readOnly = true)
     public List<Movie> getAllMovies(){
 
         return movieRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<Movie> findById(ObjectId objectId){
 
         return movieRepository.findById(objectId);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<Movie> findByImdb(String imdb){
 
+        return movieRepository.findMovieByImdb(imdb);
+    }
+
+
+    @Transactional
     public void addMovie(Movie movie){
-
         movieRepository.save(movie);
     }
 }

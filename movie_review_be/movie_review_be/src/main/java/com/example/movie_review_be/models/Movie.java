@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "movies")
+@Document(collection = "movie")
 public class Movie {
     @Id
     private ObjectId id;
